@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        .invoice {
+            width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .header h2, .header h3, .header h4 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .meta, .totals, .footer {
+            margin-top: 20px;
+        }
+
+        .meta input, .footer input,.partygst input, .dashed {
+            border: none;
+            border-bottom: 1px dashed #000;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        .meta p, .totals p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .details {
+            margin-top: 20px;
+            width:100px;
+            border-collapse: collapse;
+            border: 1px solid #000;
+            
+        }
+
+        .details th, .details td {
+            border: 1px solid #000;
+            
+            text-align: center;
+        }
+
+        .details th {
+            background-color: #f0f0f0;
+            font-size: 14px;
+            padding: 0px 5px;
+        }
+
+        .details td {
+            font-size: 16px;
+            height:30px;
+        }
+
+        .details input
+        {
+            width:142px;
+            padding:7px;
+        }
+
+        .totals p {
+            text-align: left;
+        }
+
+        .footer p {
+            font-size: 12px;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        .signature {
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .bordered-section {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        textarea{
+            width:700px;
+            height:100px;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            width: 800px;
+        }
+        td, th {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+        }
+
+
+        .partygst
+        {
+            width:470px;
+            padding-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        .partygst-table
+        {
+            width:800px;
+        }
+
+
+        .flextotal p
+        {
+            margin-top: 5px;
+        }
+
+        .case-se
+        {
+            display: flex;
+            flex-direction: row;
+            width:200px;
+            justify-content: center;
+            gap:5px;
+        }
+
+        .case-se input
+        {
+            width:75px;
+        }
+
+        #particulars
+        {
+            width:248px;
+        }
+        
+        #am-result1,#am-result2,#am-result3
+
+        {
+            width: 75px;
+            height:0px;
+            padding-bottom: 15px;
+        }
+
+        #quantity1,#rate1,#quantity2,#rate2,#quantity3,#rate3
+        {
+            width: 85px;
+        }
+
+        .logo
+        {
+            width:100px;
+            position: absolute;
+        }
+
+        .sameline-sub
+        {
+            width: 750px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .sameline-sub p
+        {
+            padding-top: 10px;
+        }
+
+
+
+        .messrs-line1
+        {
+            display: flex;
+        }
+
+        .messrs-line1 input
+        {
+            width: 100%;
+            padding-left: 16px;
+        }
+
+
+        .tax-input
+        {
+            width:30px;
+        }
+
+
+        .fright-section p
+        {
+            padding-top: 3px;
+            margin: 0px;
+        }
+
+        
+
+        .dashed{
+            width: 90%;
+        }
+
+
+        #total-bill-value
+        {
+            font-size: larger;
+            font-weight: bold;
+        }
+
+
+        .messrs-line1 input
+        {
+            letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="invoice">
+    <img class="logo" src="gowtham dec8 final logo.png">
+    <div class="header">
+        <h1>Gowtham Fireworks Industries</h1>
+        <h2>2/157, Vijayakarisalkulam (P.O.), (Via) Vembakottai, Sivakasi - 626 131</h2>
+        <h3>Factory at: Thulukankurichi Village</h3>
+        <h3>GSTIN: 33AAJFG4118Q1Z4 | License No: E/SC/TN/20/496 (EA7422)</h3>
+        <h4>Consumer Care: 94865 12280</h4>
+    </div>
+
+    <div class="meta bordered-section">
+        <div class="sameline-sub">
+        <p><strong>Invoice No:</strong> <input type="text" placeholder="Enter Invoice No"></p>
+            
+        <p><strong>Date:</strong> <input type="date"></p>
+         </div>
+        <p style="word-spacing: 6px;"><strong>Invoice of </strong> <input type="text" placeholder="Enter Invoice of"> packages of goods despatched per Goods Train / Lorry from Sivakasi to 
+            <input type="text" placeholder="Enter Destination"> under <input type="text" placeholder="travels name"> account and risk of the consignee.</p>
+         
+        <div class="messrs-line1">   <p><strong>Messrs:</strong> </p>  <input type="text">      </div>
+        <div class="messrs-line1">  <input type="text" style="padding-left: 70px;"></div>
+        <div class="messrs-line1">  <input type="text" style="padding-left: 70px;" ></div>
+
+
+    </div>
+
+    <table class="details">
+        <thead>
+        <tr>
+            <th>Marks & Nos. Case No.</th>
+            <th>Particulars</th>
+            <th>Quantity</th>
+            <th>Rate (Rs.)</th>
+            <th>Amount (Rs.)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        
+            <td colspan="5">To Cost of "Monkey Brand" Gowtham Crackers</td>
+           
+        </tr>
+
+        
+        <tr>
+            <td>
+                <div class="case-se">
+                <input type="number" id="num1" placeholder="Case start" oninput="calculateDifference1()" />
+                <input type="number" id="num2" placeholder="case  end" oninput="calculateDifference1()" />
+                </div>
+                <div id="result1"></div>
+
+            </td>
+            <td><input type="text" placeholder="Enter Particulars" id="particulars"></td>
+            <td><input type="number" placeholder="Quantity" id="quantity1" oninput="calculateProduct1()"></td>
+            <td><input type="number" placeholder="Rate" id="rate1" oninput="calculateProduct1()"></td>
+            <td><p id="am-result1"> 0</p></td>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                <div class="case-se">
+                <input type="number" id="num3" placeholder="Case start" oninput="calculateDifference2()" />
+                <input type="number" id="num4" placeholder="case  end" oninput="calculateDifference2()" />
+                </div>
+                <div id="result2"></div>
+
+            </td>
+            <td><input type="text" placeholder="Enter Particulars" id="particulars"></td>
+            <td><input type="number" placeholder="Quantity" id="quantity2" oninput="calculateProduct3()"></td>
+            <td><input type="number" placeholder="Rate" id="rate2" oninput="calculateProduct3()"></td>
+            <td><p id="am-result2"> 0</p></td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <div class="case-se">
+                <input type="number" id="num5" placeholder="Case start" oninput="calculateDifference3()" />
+                <input type="number" id="num6" placeholder="case  end" oninput="calculateDifference3()" />
+                </div>
+                <div id="result3"></div>
+
+            </td>
+            <td><input type="text" placeholder="Enter Particulars" id="particulars"></td>
+            <td><input type="number" placeholder="Quantity" id="quantity3" oninput="calculateProduct5()"></td>
+            <td><input type="number" placeholder="Rate" id="rate3" oninput="calculateProduct5()"></td>
+            <td><p id="am-result3"> 0</p></td>
+        </tr>
+
+
+        
+
+        <tr>
+            <td colspan="5" style="padding: 0px;"> <p style="padding: 0px;"><strong>HSN Code:</strong> 3604 (Fireworks)</p> </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    <table class="partygst-table">
+        <tr>
+            <td class="partygst" rowspan="2">Party <select>
+                <option value="option1">GST Number</option>
+                <option value="option2">PAN Number</option>
+                <option value="option3">Aadhaar Number</option>
+                <!-- Add more options as needed -->
+              </select> <input type="text"></td>
+        </tr>
+
+        
+        <tr>
+              <td class="totals flextotal" rowspan="2" style="width:500px;text-align: left;">  
+                <div>
+                    <p><strong>Total Value of Goods:</strong> Rs. <span id="total-amount">0</span></p>
+                
+                    <p><strong>Handling Charges: <input type="number"  class="tax-input handling-input" oninput="calculateDynamicCharges()"> (%):</strong> Rs. <span id="handling-charge">0</span></p>
+                
+                    <p><strong>Mahamai: <input type="number"  class="tax-input mahamai-input" oninput="calculateDynamicCharges()"> (%):</strong> Rs. <span id="mahamai">0</span></p>
+
+                    <p><strong>Total Taxable Amount:</strong> Rs. <span id="total-taxable-amount">0</span></p>
+
+                
+                    <p><strong>CGST: <input type="number" class="tax-input cgst-input" oninput="calculateDynamicCharges()"> (%):</strong> Rs. <span id="cgst">0</span></p>
+                
+                    <p><strong>SGST: <input type="number"  class="tax-input sgst-input" oninput="calculateDynamicCharges()"> (%):</strong> Rs. <span id="sgst">0</span></p>
+                
+                    <p><strong>IGST: <input type="number"  class="tax-input igst-input" oninput="calculateDynamicCharges()"> (%):</strong> Rs. <span id="igst">0</span></p>
+                
+                
+                    <p><strong>Total Bill Value:</strong> Rs. <span id="total-bill-value">0</span></p>
+                </div>
+                
+            </td>
+            
+        </tr>
+
+
+        
+
+        <tr style="height:140px;">
+            <td class="fright-section">
+            <p><strong>Bill Amount Rs:</strong> <input type="number" ></p>
+            <p><strong>Freight Rs:</strong> <input type="number" ></p>
+            <p><strong>Total Rs:</strong> <input type="number" ></p>
+            <p><strong>D.D. No:</strong> <input type="text" ></p>
+            <p><strong>Dt:</strong> <input type="date"></p>
+            <p><strong>For Rs:</strong> <input type="number" ></p>
+             </td>
+        </tr>
+       
+    </table>
+
+
+    <div class="signature">
+        <strong> Total Bill Value(in words):
+        
+       <p id="billInWords"></p></strong>
+        <p>Terms: Cash / D/P through:
+        <input style="border: none;border-bottom: 1px dashed #000;width:73%;"></p>
+        <p>Prepared by: <input type="text"   style="border: none;border-bottom: 1px dashed #000;width:140px;" >
+        Checked by: <input type="text"  style="border: none;border-bottom: 1px dashed #000;width:150px;">For GOWTHAM FIREWORK INDUSTRIES</p>
+        <p>E. & O. E.</p>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;padding: 5px 10px;">
+            <p>Subject to Sivakasi Jurisdiction only</p>
+            <p>Manager / Partner</p>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    function calculateDifference1() {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById("result1").textContent = "0";
+            return;
+        }
+
+        const difference = Math.abs(num1 - (num2 + 1));
+        document.getElementById("result1").textContent = `TOTAL: ${difference}`;
+    }
+
+
+    function calculateDifference2() {
+        const num1 = parseFloat(document.getElementById("num3").value);
+        const num2 = parseFloat(document.getElementById("num4").value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById("result2").textContent = "0";
+            return;
+        }
+
+        const difference = Math.abs(num1 - (num2 + 1));
+        document.getElementById("result2").textContent = `TOTAL: ${difference}`;
+    }
+
+
+    function calculateDifference3() {
+        const num1 = parseFloat(document.getElementById("num5").value);
+        const num2 = parseFloat(document.getElementById("num6").value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById("result3").textContent = "0";
+            return;
+        }
+
+        const difference = Math.abs(num1 - (num2 + 1));
+        document.getElementById("result3").textContent = `TOTAL: ${difference}`;
+    }
+
+    function calculateProduct1() {
+        const num1 = parseFloat(document.getElementById("quantity1").value);
+        const num2 = parseFloat(document.getElementById("rate1").value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById("am-result1").textContent = "0";
+            calculateTotalAmount(); // Update total
+            return;
+        }
+
+        const product = num1 * num2;
+        document.getElementById("am-result1").textContent = `${product}`;
+        calculateTotalAmount(); // Update total
+    }
+
+    function calculateProduct3() {
+        const num1 = parseFloat(document.getElementById("quantity2").value);
+        const num2 = parseFloat(document.getElementById("rate2").value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById("am-result2").textContent = "0";
+            calculateTotalAmount(); // Update total
+            return;
+        }
+
+        const product = num1 * num2;
+        document.getElementById("am-result2").textContent = `${product}`;
+        calculateTotalAmount(); // Update total
+    }
+
+    function calculateProduct5() {
+        const num1 = parseFloat(document.getElementById("quantity3").value);
+        const num2 = parseFloat(document.getElementById("rate3").value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+            document.getElementById("am-result3").textContent = "0";
+            calculateTotalAmount(); // Update total
+            return;
+        }
+
+        const product = num1 * num2;
+        document.getElementById("am-result3").textContent = `${product}`;
+        calculateTotalAmount(); // Update total
+    }
+
+    function calculateTotalAmount() {
+        // Fetch all amount elements
+        const amounts = [
+            parseFloat(document.getElementById("am-result1").textContent) || 0,
+            parseFloat(document.getElementById("am-result2").textContent) || 0,
+            parseFloat(document.getElementById("am-result3").textContent) || 0,
+        ];
+
+        // Calculate the sum
+        const totalAmount = amounts.reduce((acc, amount) => acc + amount, 0);
+
+        // Display the total in the div
+        document.getElementById("total-amount").textContent = totalAmount;
+    }
+
+    function calculateDynamicCharges() {
+    const totalValue = parseFloat(document.getElementById("total-amount").textContent) || 0;
+
+    // Handling Charges
+    const handlingPercentage = parseFloat(document.querySelector(".handling-input").value) || 0;
+    const handlingCharge = (totalValue * handlingPercentage) / 100;
+    document.getElementById("handling-charge").textContent = handlingCharge.toFixed(2);
+
+    // Mahamai
+    const mahamaiPercentage = parseFloat(document.querySelector(".mahamai-input").value) || 0;
+    const mahamai = (totalValue * mahamaiPercentage) / 100;
+    document.getElementById("mahamai").textContent = mahamai.toFixed(2);
+
+    // Total Taxable Amount
+    const totalTaxableAmount = totalValue + handlingCharge + mahamai;
+    document.getElementById("total-taxable-amount").textContent = totalTaxableAmount.toFixed(2);
+
+    // CGST
+    const cgstPercentage = parseFloat(document.querySelector(".cgst-input").value) || 0;
+    const cgst = (totalTaxableAmount * cgstPercentage) / 100;
+    document.getElementById("cgst").textContent = cgst.toFixed(2);
+
+    // SGST
+    const sgstPercentage = parseFloat(document.querySelector(".sgst-input").value) || 0;
+    const sgst = (totalTaxableAmount * sgstPercentage) / 100;
+    document.getElementById("sgst").textContent = sgst.toFixed(2);
+
+    // IGST
+    const igstPercentage = parseFloat(document.querySelector(".igst-input").value) || 0;
+    const igst = (totalTaxableAmount * igstPercentage) / 100;
+    document.getElementById("igst").textContent = igst.toFixed(2);
+
+    
+
+    // Total Bill Value
+    const totalTaxes = cgst + sgst + igst;
+    const totalBillValue = totalTaxableAmount + totalTaxes;
+    document.getElementById("total-bill-value").textContent = totalBillValue.toFixed(2);
+}
+
+
+
+
+
+
+
+function convertNumberToWords(num) {
+    if (num === 0) return "Zero";
+
+    const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+    const teens = ["Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+    const tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+    const thousands = ["", "Thousand", "Lakh", "Crore"];
+
+    function convertLessThanThousand(n) {
+        let str = "";
+        if (n >= 100) {
+            str += ones[Math.floor(n / 100)] + " Hundred ";
+            n %= 100;
+        }
+        if (n >= 11 && n <= 19) {
+            str += teens[n - 11] + " ";
+        } else {
+            if (n >= 10) {
+                str += tens[Math.floor(n / 10)] + " ";
+            }
+            if (n % 10 > 0) {
+                str += ones[n % 10] + " ";
+            }
+        }
+        return str.trim();
+    }
+
+    function convertToWords(n) {
+        if (n === 0) return "Zero";
+
+        let words = "";
+        let partCount = 0;
+
+        while (n > 0) {
+            let part = n % 1000;
+            if (part > 0) {
+                words = convertLessThanThousand(part) + " " + (thousands[partCount] ? thousands[partCount] + " " : "") + words;
+            }
+            n = Math.floor(n / 1000);
+            partCount++;
+        }
+
+        return words.trim();
+    }
+
+    return convertToWords(num);
+}
+
+// Function to get the dynamically changing value and convert it to words
+function convertBillValueToWords() {
+    let billValueElement = document.getElementById("total-bill-value"); // Target the <p> tag
+    let billValue = parseFloat(billValueElement.innerText.trim()); // Extract and convert text to a number
+    
+    if (!isNaN(billValue)) {
+        let rupees = Math.floor(billValue); // Get the rupee part
+        let paise = Math.round((billValue - rupees) * 100); // Get the paise part
+
+        let rupeeWords = rupees > 0 ? "INR "+ convertNumberToWords(rupees)  : "";
+        let paiseWords = paise > 0 ? convertNumberToWords(paise) + " Paise" : "";
+
+        let finalWords = rupeeWords;
+        if (paise > 0) {
+            finalWords += rupees > 0 ? " and " : ""; // Add "and" if rupees exist
+            finalWords += paiseWords;
+        }
+
+        document.getElementById("billInWords").innerText = finalWords + " Only";
+    } else {
+        document.getElementById("billInWords").innerText = "Invalid amount";
+    }
+}
+
+// Automatically update when the bill value changes
+setInterval(convertBillValueToWords, 1000); // Check every second
+
+setInterval(calculateDynamicCharges,1000)
+
+</script>
+
+
+</body>
+</html>
